@@ -112,7 +112,7 @@ function VeiculosScreen({ route }) {
         )}
         keyExtractor={(item, index) => index.toString()}
       />
-      <Text>atitus-123</Text>
+      <Text>ATITUS</Text>
     </View>
   );
 }
@@ -148,6 +148,9 @@ function SobreScreen() {
     <Text>RA: 1129494</Text>
     <Text>Nome: Pedro Henrique De Bortoli</Text>
     <Text>E-mail: 1129494@atitus.edu.br</Text>
+    <Text style={styles.spacedText}></Text><Text>RA: 1134141</Text>
+    <Text>Nome: Bruno Pasquetti</Text>
+    <Text>E-mail: 1134141@atitus.edu.br</Text>
     <Text>Faculdade: ATITUS Educação</Text>
   </View>
   );
