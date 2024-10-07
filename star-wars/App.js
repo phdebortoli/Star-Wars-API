@@ -28,7 +28,7 @@ function HomeScreen({ navigation }) {
         )}
         keyExtractor={item => item.id.toString()}
       />
-      <Text>ATITUS</Text>
+      <Text style={[styles.title, styles.atitus ]}>ATITUS</Text>
     </View>
   );
 }
@@ -65,30 +65,37 @@ function DetalhesScreen({ route, navigation }) {
     return <Text>Carregando...</Text>;
   }
 
-  return (
+   return (
     <View style={styles.container}>
       <Text style={styles.title}>{detalhes.name}</Text>
-      <Text>Altura: {detalhes.height}</Text>
-      <Text>Peso: {detalhes.mass}</Text>
-      <Text>Cor do cabelo: {detalhes.hair_color}</Text>
-      <Text>Cor da pele: {detalhes.skin_color}</Text>
-      <Text>Cor dos olhos: {detalhes.eye_color}</Text>
-      <Text>Gênero: {detalhes.gender}</Text>
-      <Button 
-        title="Veículos" 
-        onPress={async () => { 
-          await som(); 
-          navigation.navigate('Veiculos', { veiculos }); 
-        }} 
-      />
-      <Button 
-        title="Filmes" 
-        onPress={async () => { 
-          await som(); 
-          navigation.navigate('Filmes', { filmes }); 
-        }} 
-      />
-      <Text>ATITUS</Text>
+      <Text style={styles.infoText}>Altura: {detalhes.height}</Text>
+      <Text style={styles.infoText}>Peso: {detalhes.mass}</Text>
+      <Text style={styles.infoText}>Cor do cabelo: {detalhes.hair_color}</Text>
+      <Text style={styles.infoText}>Cor da pele: {detalhes.skin_color}</Text>
+      <Text style={styles.infoText}>Cor dos olhos: {detalhes.eye_color}</Text>
+      <Text style={styles.infoText}>Gênero: {detalhes.gender}</Text>
+      <View style={styles.spacedText} />
+
+      <View style={[styles.buttonContainer, {marginBottom: 5 }]}>
+        <Button 
+          title="Veículos" 
+          onPress={async () => { 
+            await som(); 
+            navigation.navigate('Veiculos', { veiculos }); 
+          }} 
+        />
+      </View>
+      <View style={styles.buttonContainer}>
+        <Button 
+          title="Filmes" 
+          onPress={async () => { 
+            await som(); 
+            navigation.navigate('Filmes', { filmes }); 
+          }} 
+        />
+      </View> 
+      <View style={styles.spacedText} />
+      <Text style={[styles.title, styles.atitus ]}>ATITUS</Text>
     </View>
   );
 }
@@ -97,7 +104,11 @@ function VeiculosScreen({ route }) {
   const { veiculos } = route.params;
 
   if (veiculos.length === 0) {
-    return <Text>Não há veículos disponíveis.</Text>;
+    return(
+      <View style={styles.container}>
+        <Text>Não há veículos disponíveis.</Text>
+      </View>
+    );
   }
 
   return (
@@ -105,14 +116,17 @@ function VeiculosScreen({ route }) {
       <Text style={styles.title}>Veículos</Text>
       <FlatList
         data={veiculos}
-        renderItem={({ item, index }) => (
-          <Text key={index}>
-            {"\n"}Nome: {item.name}{"\n"}Modelo: {item.model}{"\n"}Passageiros: {item.passengers}
-          </Text>
+        renderItem={({ item }) => (
+          <View style={styles.vehicleContainer}>
+            <Text style={styles.infoText}>Nome: {item.name}</Text>
+            <Text style={styles.infoText}>Modelo: {item.model}</Text>
+            <Text style={styles.infoText}>Passageiros: {item.passengers}</Text>
+            <View style={styles.spacedText} />
+          </View>
         )}
         keyExtractor={(item, index) => index.toString()}
       />
-      <Text>ATITUS</Text>
+      <Text style={[styles.title, styles.atitus ]}>ATITUS</Text>
     </View>
   );
 }
@@ -121,7 +135,11 @@ function FilmesScreen({ route }) {
   const { filmes } = route.params;
 
   if (filmes.length === 0) {
-    return <Text>Não há filmes disponíveis.</Text>;
+    return(
+      <View style={styles.container}>
+        <Text>Não há filmes disponíveis.</Text>
+      </View>
+    );
   }
 
   return (
@@ -129,30 +147,53 @@ function FilmesScreen({ route }) {
       <Text style={styles.title}>Filmes</Text>
       <FlatList
         data={filmes}
-        renderItem={({ item, index }) => (
-          <Text key={index}>
-            {"\n"}Título: {item.title}{"\n"}Diretor: {item.director}{"\n"}Data de Lançamento: {item.release_date}
-          </Text>
+        renderItem={({ item }) => (
+          <View style={styles.filmContainer}>
+            <Text style={styles.infoText}>Título: {item.title}</Text>
+            <Text style={styles.infoText}>Diretor: {item.director}</Text>
+            <Text style={styles.infoText}>Data de Lançamento: {item.release_date}</Text>
+            <View style={styles.spacedText} /> 
+          </View>
         )}
         keyExtractor={(item, index) => index.toString()}
       />
-      <Text>ATITUS</Text>
+      <View style={styles.spacedText} />
+      <Text style={[styles.title, styles.atitus ]}>ATITUS</Text>
     </View>
   );
 }
 
 function SobreScreen() {
+  const desenvolvedores = [
+    {
+      ra: '1129494',
+      nome: 'Pedro Henrique De Bortoli',
+      email: '1129494@atitus.edu.br',
+    },
+    {
+      ra: '1134141',
+      nome: 'Bruno Pasquetti',
+      email: '1134141@atitus.edu.br',
+    },
+  ];
+
   return (
     <View style={styles.container}>
-    <Text style={styles.title}>Sobre o Desenvolvedor</Text>
-    <Text>RA: 1129494</Text>
-    <Text>Nome: Pedro Henrique De Bortoli</Text>
-    <Text>E-mail: 1129494@atitus.edu.br</Text>
-    <Text style={styles.spacedText}></Text><Text>RA: 1134141</Text>
-    <Text>Nome: Bruno Pasquetti</Text>
-    <Text>E-mail: 1134141@atitus.edu.br</Text>
-    <Text>Faculdade: ATITUS Educação</Text>
-  </View>
+      <Text style={styles.title}>Sobre os Desenvolvedores</Text>
+      <FlatList
+        data={desenvolvedores}
+        renderItem={({ item }) => (
+          <View style={styles.developerContainer}>
+            <Text style={styles.infoText}>RA: {item.ra}</Text>
+            <Text style={styles.infoText}>Nome: {item.nome}</Text>
+            <Text style={styles.infoText}>E-mail: {item.email}</Text>
+            <View style={styles.spacedText} />
+          </View>
+        )}
+        keyExtractor={(item) => item.ra}
+      />
+      <Text style={[styles.title, styles.atitus ]}>ATITUS</Text>
+    </View>
   );
 }
 
@@ -162,10 +203,12 @@ export default function App() {
       <Stack.Navigator initialRouteName="Home">
       <Stack.Screen name="Home" component={HomeScreen} options={({ navigation }) => ({
             headerRight: () => (
+              <View style={{ marginRight: 15 }}>
               <Button
                 title="Sobre"
                 onPress={() => navigation.navigate('Sobre')}
               />
+            </View>
             ),
           })}
         />
@@ -181,13 +224,20 @@ export default function App() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    justifyContent: 'center',
+    justifyContent: 'flex-start',
     padding: 16,
   },
   title: {
     fontSize: 24,
     fontWeight: 'bold',
     marginBottom: 20,
+  },
+  infoText: {
+    fontSize: 16, 
+    marginBottom: 5, 
+  },
+  spacedText: {
+    height: 15,
   },
   card: {
     backgroundColor: '#f8f8f8',
@@ -198,4 +248,12 @@ const styles = StyleSheet.create({
   cardText: {
     fontSize: 18,
   },
+  developerContainer: {
+    marginBottom: 10, 
+  },
+  atitus: {
+    position: 'absolute', 
+    bottom: 10, 
+    left: 10,
+  }
 });
